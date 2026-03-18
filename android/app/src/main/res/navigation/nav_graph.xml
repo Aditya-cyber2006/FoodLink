@@ -4,13 +4,48 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-    <!-- This is a placeholder navigation graph -->
-    <!-- You'll add actual fragments here as you build them -->
-
-    <!-- Example Fragment -->
+    <!-- Home Fragment -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.foodbridge.app.ui.home.HomeFragment"
-        android:label="Home" />
+        android:label="FoodBridge">
+        <action
+            android:id="@+id/action_home_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- Login Fragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.foodbridge.app.ui.login.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/action_login_to_restaurant_dashboard"
+            app:destination="@id/restaurantDashboardFragment" />
+        <action
+            android:id="@+id/action_login_to_ngo_dashboard"
+            app:destination="@id/ngoDashboardFragment" />
+        <action
+            android:id="@+id/action_login_to_admin_dashboard"
+            app:destination="@id/adminDashboardFragment" />
+    </fragment>
+
+    <!-- Restaurant Dashboard Fragment -->
+    <fragment
+        android:id="@+id/restaurantDashboardFragment"
+        android:name="com.foodbridge.app.ui.dashboard.RestaurantDashboardFragment"
+        android:label="Restaurant Dashboard" />
+
+    <!-- NGO Dashboard Fragment -->
+    <fragment
+        android:id="@+id/ngoDashboardFragment"
+        android:name="com.foodbridge.app.ui.dashboard.NGODashboardFragment"
+        android:label="NGO Dashboard" />
+
+    <!-- Admin Dashboard Fragment -->
+    <fragment
+        android:id="@+id/adminDashboardFragment"
+        android:name="com.foodbridge.app.ui.dashboard.AdminDashboardFragment"
+        android:label="Admin Dashboard" />
 
 </navigation>

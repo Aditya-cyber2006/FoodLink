@@ -7,7 +7,7 @@
     android:background="@color/background_light">
 
     <!-- App Bar -->
-    <com.google.android.material.appbarcompat.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
@@ -22,7 +22,7 @@
             app:title="@string/app_name"
             app:titleTextColor="@color/white" />
 
-    </com.google.android.material.appbarcompat.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView

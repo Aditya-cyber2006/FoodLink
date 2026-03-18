@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FoodBridge"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/primary"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect Food, Connect Communities"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="32dp" />
+
+    <EditText
+        android:id="@+id/login_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edit_text_bg"
+        android:textColorHint="@color/text_secondary"
+        android:textColor="@color/text_primary" />
+
+    <EditText
+        android:id="@+id/login_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edit_text_bg"
+        android:textColorHint="@color/text_secondary"
+        android:textColor="@color/text_primary" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Login"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/primary"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/login_demo_restaurant_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Demo: Restaurant Account"
+        android:textSize="13sp"
+        android:textColor="@color/primary"
+        android:background="@drawable/button_outline_bg"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/login_demo_ngo_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Demo: NGO Account"
+        android:textSize="13sp"
+        android:textColor="@color/primary"
+        android:background="@drawable/button_outline_bg"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/login_demo_admin_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Demo: Admin Account"
+        android:textSize="13sp"
+        android:textColor="@color/primary"
+        android:background="@drawable/button_outline_bg" />
+
+</LinearLayout>

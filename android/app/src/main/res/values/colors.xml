@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors -->
-    <color name="primary">#FF6B35</color>
-    <color name="primary_dark">#EA4C00</color>
-    <color name="primary_light">#FFB399</color>
+    <!-- Primary Colors - Green -->
+    <color name="primary">#2ECC71</color>
+    <color name="primary_dark">#27AE60</color>
+    <color name="primary_light">#D5F4E6</color>
     
-    <!-- Secondary Colors -->
-    <color name="secondary">#004E89</color>
-    <color name="secondary_dark">#003366</color>
-    <color name="secondary_light">#4D7BAC</color>
+    <!-- Secondary Colors - Blue -->
+    <color name="secondary">#3498DB</color>
+    <color name="secondary_dark">#2980B9</color>
+    <color name="secondary_light">#D6EAF8</color>
     
     <!-- Status Colors -->
     <color name="success">#4CAF50</color>
@@ -39,6 +39,9 @@
     <color name="text_secondary">#6B7280</color>
     <color name="text_disabled">#9CA3AF</color>
     <color name="text_light">#F9FAFB</color>
+    
+    <!-- Light Gray (UI Components) -->
+    <color name="light_gray">#F3F4F6</color>
     
     <!-- Surface Colors -->
     <color name="surface">#FFFFFF</color>

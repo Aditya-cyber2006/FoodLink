@@ -118,7 +118,7 @@ class AuthService(
      */
     suspend fun updateEmail(newEmail: String): Result<Unit> {
         return try {
-            firebaseAuth.currentUser?.updateEmail(newEmail)?.await()
+            firebaseAuth.currentUser?.verifyBeforeUpdateEmail(newEmail)?.await()
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
