@@ -11,7 +11,12 @@
         android:label="FoodBridge">
         <action
             android:id="@+id/action_home_to_login"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment">
+            <argument
+                android:name="selectedRole"
+                app:argType="string"
+                android:defaultValue="all" />
+        </action>
     </fragment>
 
     <!-- Login Fragment -->
@@ -19,6 +24,10 @@
         android:id="@+id/loginFragment"
         android:name="com.foodbridge.app.ui.login.LoginFragment"
         android:label="Login">
+        <argument
+            android:name="selectedRole"
+            app:argType="string"
+            android:defaultValue="all" />
         <action
             android:id="@+id/action_login_to_restaurant_dashboard"
             app:destination="@id/restaurantDashboardFragment" />

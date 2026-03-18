@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,20 +10,22 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/primary" />
+            android:layout_height="wrap_content"
+            android:text="Post Surplus Food"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/secondary"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Restaurant Dashboard"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp" />
+            android:text="Create a listing and make it available instantly to nearby NGOs."
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,10 +98,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="Add New Listing"
+                android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:background="@color/primary" />
+                android:backgroundTint="@color/primary" />
 
         </LinearLayout>
 
@@ -107,9 +110,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Your Active Listings"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/secondary"
             android:layout_marginBottom="12dp" />
 
         <LinearLayout

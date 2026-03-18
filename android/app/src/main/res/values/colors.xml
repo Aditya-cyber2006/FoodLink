@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors - Green -->
-    <color name="primary">#2ECC71</color>
-    <color name="primary_dark">#27AE60</color>
-    <color name="primary_light">#D5F4E6</color>
-    
-    <!-- Secondary Colors - Blue -->
-    <color name="secondary">#3498DB</color>
-    <color name="secondary_dark">#2980B9</color>
-    <color name="secondary_light">#D6EAF8</color>
+    <!-- Primary Colors - Emerald -->
+    <color name="primary">#00A86B</color>
+    <color name="primary_dark">#007A4D</color>
+    <color name="primary_light">#D8F6EA</color>
+
+    <!-- Secondary Colors - Royal Blue -->
+    <color name="secondary">#0F4C81</color>
+    <color name="secondary_dark">#0B3A63</color>
+    <color name="secondary_light">#DBE8F5</color>
     
     <!-- Status Colors -->
     <color name="success">#4CAF50</color>
     <color name="error">#F44336</color>
-    <color name="warning">#FF9800</color>
+    <color name="warning">#D18A00</color>
     <color name="info">#2196F3</color>
     
     <!-- Neutral Colors -->
@@ -31,12 +31,12 @@
     <color name="gray_900">#111827</color>
     
     <!-- Background Colors -->
-    <color name="background_light">#FFFBF7</color>
-    <color name="background_dark">#0F1419</color>
+    <color name="background_light">#F4F8F6</color>
+    <color name="background_dark">#0B1713</color>
     
     <!-- Text Colors -->
-    <color name="text_primary">#1F2937</color>
-    <color name="text_secondary">#6B7280</color>
+    <color name="text_primary">#132A24</color>
+    <color name="text_secondary">#4F6B63</color>
     <color name="text_disabled">#9CA3AF</color>
     <color name="text_light">#F9FAFB</color>
     

@@ -10,9 +10,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.foodbridge.app.DummyDataRepository
 import com.foodbridge.app.DummyListing
+import com.foodbridge.app.FirebaseDataRepository
 import com.foodbridge.app.R
+import kotlinx.coroutines.launch
 
 class RestaurantDashboardFragment : Fragment() {
 
@@ -50,18 +53,24 @@ class RestaurantDashboardFragment : Fragment() {
                     location = location,
                     status = "available"
                 )
-                
-                DummyDataRepository.addListing(newListing)
-                Toast.makeText(context, "Listing added successfully!", Toast.LENGTH_SHORT).show()
-                
-                // Clear inputs
-                foodNameInput.text.clear()
-                quantityInput.text.clear()
-                expiryInput.text.clear()
-                locationInput.text.clear()
-                
-                // Refresh listings
-                displayListings(listingsContainer)
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val savedToFirebase = saveListingToFirebaseIfAvailable(newListing)
+                    if (!savedToFirebase) {
+                        DummyDataRepository.addListing(newListing)
+                    }
+
+                    Toast.makeText(context, "Listing added successfully!", Toast.LENGTH_SHORT).show()
+
+                    // Clear inputs
+                    foodNameInput.text.clear()
+                    quantityInput.text.clear()
+                    expiryInput.text.clear()
+                    locationInput.text.clear()
+
+                    // Refresh listings
+                    displayListings(listingsContainer)
+                }
             } else {
                 Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
@@ -71,44 +80,70 @@ class RestaurantDashboardFragment : Fragment() {
     }
 
     private fun displayListings(container: LinearLayout) {
-        container.removeAllViews()
+        viewLifecycleOwner.lifecycleScope.launch {
+            container.removeAllViews()
 
-        val listings = DummyDataRepository.getAvailableListings()
-        
-        for (listing in listings) {
-            val itemView = LinearLayout(context)
-            itemView.orientation = LinearLayout.VERTICAL
-            itemView.setPadding(16, 16, 16, 16)
-            itemView.setBackgroundColor(resources.getColor(R.color.white))
-            
-            val layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(0, 8, 0, 8)
-            itemView.layoutParams = layoutParams
+            val listings = loadListings()
 
-            val foodText = TextView(context)
-            foodText.text = listing.foodName
-            foodText.textSize = 18f
-            foodText.setTextColor(resources.getColor(R.color.primary))
-            foodText.setTypeface(null, android.graphics.Typeface.BOLD)
+            for (listing in listings) {
+                val itemView = LinearLayout(context)
+                itemView.orientation = LinearLayout.VERTICAL
+                itemView.setPadding(16, 16, 16, 16)
+                itemView.setBackgroundColor(resources.getColor(R.color.white))
 
-            val quantityText = TextView(context)
-            quantityText.text = "Quantity: ${listing.quantity}"
-            quantityText.textSize = 14f
-            quantityText.setTextColor(resources.getColor(R.color.text_secondary))
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                layoutParams.setMargins(0, 8, 0, 8)
+                itemView.layoutParams = layoutParams
 
-            val expiryText = TextView(context)
-            expiryText.text = "Expires in: ${listing.expiryTime}"
-            expiryText.textSize = 14f
-            expiryText.setTextColor(resources.getColor(R.color.warning))
+                val foodText = TextView(context)
+                foodText.text = listing.foodName
+                foodText.textSize = 18f
+                foodText.setTextColor(resources.getColor(R.color.primary))
+                foodText.setTypeface(null, android.graphics.Typeface.BOLD)
 
-            itemView.addView(foodText)
-            itemView.addView(quantityText)
-            itemView.addView(expiryText)
-            
-            container.addView(itemView)
+                val quantityText = TextView(context)
+                quantityText.text = "Quantity: ${listing.quantity}"
+                quantityText.textSize = 14f
+                quantityText.setTextColor(resources.getColor(R.color.text_secondary))
+
+                val expiryText = TextView(context)
+                expiryText.text = "Expires in: ${listing.expiryTime}"
+                expiryText.textSize = 14f
+                expiryText.setTextColor(resources.getColor(R.color.warning))
+
+                itemView.addView(foodText)
+                itemView.addView(quantityText)
+                itemView.addView(expiryText)
+
+                container.addView(itemView)
+            }
+        }
+    }
+
+    private suspend fun loadListings(): List<DummyListing> {
+        val ctx = context ?: return DummyDataRepository.getAvailableListings()
+        return try {
+            if (FirebaseDataRepository.isConfigured(ctx)) {
+                FirebaseDataRepository.getAvailableListings()
+            } else {
+                DummyDataRepository.getAvailableListings()
+            }
+        } catch (_: Exception) {
+            DummyDataRepository.getAvailableListings()
+        }
+    }
+
+    private suspend fun saveListingToFirebaseIfAvailable(listing: DummyListing): Boolean {
+        val ctx = context ?: return false
+        return try {
+            if (!FirebaseDataRepository.isConfigured(ctx)) return false
+            FirebaseDataRepository.addListing(listing)
+            true
+        } catch (_: Exception) {
+            false
         }
     }
 }

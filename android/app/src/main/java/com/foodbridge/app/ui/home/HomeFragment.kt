@@ -2,10 +2,14 @@ package com.foodbridge.app.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.foodbridge.app.R
 
@@ -25,22 +29,38 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Button Click Listeners
-        val btnLogin = view.findViewById<Button>(R.id.btn_login)
-        val btnRegister = view.findViewById<Button>(R.id.btn_register)
-        val btnGetStarted = view.findViewById<Button>(R.id.btn_get_started)
+        val btnRoleMenu = view.findViewById<ImageButton>(R.id.btn_role_menu)
+        val btnOpenRoleMenu = view.findViewById<Button>(R.id.btn_open_role_menu)
 
-        btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_login)
+        btnRoleMenu.setOnClickListener {
+            showRoleMenu(it)
         }
 
-        btnRegister.setOnClickListener {
-            // TODO: Navigate to Register screen
+        btnOpenRoleMenu.setOnClickListener {
+            showRoleMenu(it)
+        }
+    }
+
+    private fun showRoleMenu(anchor: View) {
+        val popupMenu = PopupMenu(requireContext(), anchor)
+        popupMenu.menuInflater.inflate(R.menu.home_role_menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            onRoleSelected(menuItem)
+        }
+        popupMenu.show()
+    }
+
+    private fun onRoleSelected(menuItem: MenuItem): Boolean {
+        val selectedRole = when (menuItem.itemId) {
+            R.id.menu_role_restaurant -> "restaurant"
+            R.id.menu_role_ngo -> "ngo"
+            R.id.menu_role_admin -> "admin"
+            else -> "all"
         }
 
-        btnGetStarted.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_login)
-        }
+        val args = bundleOf("selectedRole" to selectedRole)
+        findNavController().navigate(R.id.action_home_to_login, args)
+        return true
     }
 }
 

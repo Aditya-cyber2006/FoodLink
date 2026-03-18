@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "FoodBridge"
 include(":app")
-include(":app")

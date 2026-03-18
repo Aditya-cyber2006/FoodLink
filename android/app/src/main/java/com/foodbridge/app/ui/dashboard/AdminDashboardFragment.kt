@@ -9,7 +9,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.foodbridge.app.DummyDataRepository
+import com.foodbridge.app.DummyListing
+import com.foodbridge.app.FirebaseDataRepository
 import com.foodbridge.app.R
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class AdminDashboardFragment : Fragment() {
 
@@ -24,16 +28,19 @@ class AdminDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        displayAdminStats(view)
-        displayAllAccounts(view)
-        displayAllListings(view)
+        viewLifecycleOwner.lifecycleScope.launch {
+            val accounts = loadAccounts()
+            val listings = loadListings()
+
+            displayAdminStats(view, accounts, listings)
+            displayAllAccounts(view, accounts)
+            displayAllListings(view, listings)
+        }
     }
 
-    private fun displayAdminStats(view: View) {
+    private fun displayAdminStats(view: View, accounts: List<com.foodbridge.app.DummyAccount>, listings: List<DummyListing>) {
         val statsContainer = view.findViewById<LinearLayout>(R.id.admin_stats_container)
-
-        val accounts = DummyDataRepository.dummyAccounts
-        val listings = DummyDataRepository.dummyListings
+        statsContainer.removeAllViews()
 
         val statsText = TextView(view.context)
         statsText.text = "ADMIN DASHBOARD STATS\n\n" +
@@ -50,7 +57,7 @@ class AdminDashboardFragment : Fragment() {
         statsContainer.addView(statsText)
     }
 
-    private fun displayAllAccounts(view: View) {
+    private fun displayAllAccounts(view: View, accounts: List<com.foodbridge.app.DummyAccount>) {
         val accountsContainer = view.findViewById<LinearLayout>(R.id.admin_accounts_container)
         accountsContainer.removeAllViews()
 
@@ -61,8 +68,6 @@ class AdminDashboardFragment : Fragment() {
         titleText.setTextColor(resources.getColor(R.color.primary))
         titleText.setPadding(16, 16, 16, 8)
         accountsContainer.addView(titleText)
-
-        val accounts = DummyDataRepository.dummyAccounts
 
         for (account in accounts) {
             val itemView = LinearLayout(view.context)
@@ -95,7 +100,7 @@ class AdminDashboardFragment : Fragment() {
         }
     }
 
-    private fun displayAllListings(view: View) {
+    private fun displayAllListings(view: View, listings: List<DummyListing>) {
         val listingsContainer = view.findViewById<LinearLayout>(R.id.admin_listings_container)
         listingsContainer.removeAllViews()
 
@@ -106,8 +111,6 @@ class AdminDashboardFragment : Fragment() {
         titleText.setTextColor(resources.getColor(R.color.primary))
         titleText.setPadding(16, 16, 16, 8)
         listingsContainer.addView(titleText)
-
-        val listings = DummyDataRepository.dummyListings
 
         for (listing in listings) {
             val itemView = LinearLayout(view.context)
@@ -137,6 +140,32 @@ class AdminDashboardFragment : Fragment() {
             itemView.addView(foodText)
             itemView.addView(detailText)
             listingsContainer.addView(itemView)
+        }
+    }
+
+    private suspend fun loadAccounts(): List<com.foodbridge.app.DummyAccount> {
+        val ctx = context ?: return DummyDataRepository.dummyAccounts
+        return try {
+            if (FirebaseDataRepository.isConfigured(ctx)) {
+                FirebaseDataRepository.getAllUserProfiles()
+            } else {
+                DummyDataRepository.dummyAccounts
+            }
+        } catch (_: Exception) {
+            DummyDataRepository.dummyAccounts
+        }
+    }
+
+    private suspend fun loadListings(): List<DummyListing> {
+        val ctx = context ?: return DummyDataRepository.dummyListings
+        return try {
+            if (FirebaseDataRepository.isConfigured(ctx)) {
+                FirebaseDataRepository.getAvailableListings()
+            } else {
+                DummyDataRepository.dummyListings
+            }
+        } catch (_: Exception) {
+            DummyDataRepository.dummyListings
         }
     }
 }

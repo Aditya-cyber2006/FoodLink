@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background_light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,10 +10,22 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@color/primary" />
+            android:layout_height="wrap_content"
+            android:text="Control Center"
+            android:textColor="@color/secondary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monitor accounts and listings from one place."
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:layout_marginBottom="14dp" />
 
         <LinearLayout
             android:id="@+id/admin_stats_container"
@@ -29,9 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registered Accounts"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/secondary"
             android:layout_marginBottom="12dp" />
 
         <LinearLayout
@@ -45,9 +57,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="All Food Listings"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/secondary"
             android:layout_marginBottom="12dp" />
 
         <LinearLayout
