@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Include all files by default -->
+    <include domain="root" path="." />
+    
+    <!-- Exclude sensitive data -->
+    <exclude domain="sharedpref" path="com.google.firebase.crashlytics.prefs.xml" />
+</full-backup-content>

@@ -1,0 +1,30 @@
+# Android
+.gradle/
+.idea/
+build/
+*.apk
+*.aar
+gradle/
+gradlew
+gradlew.bat
+local.properties
+*.iml
+
+# Generated files
+.DS_Store
+*.log
+*.swp
+*.swo
+Thumbs.db
+
+# IDE
+.vscode/
+*.jks
+*.keystore
+
+# Sensitive
+google-services.json
+
+# Node (just in case)
+node_modules/
+package-lock.json
